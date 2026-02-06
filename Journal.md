@@ -1,4 +1,4 @@
-## [Date: 02-06-YYYY]
+## [Date: 02-06-2026]
 
 **1. What did I accomplish yesterday?**
 - Partial Documentation of the project
