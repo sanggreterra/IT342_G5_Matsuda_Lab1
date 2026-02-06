@@ -1,0 +1,50 @@
+.app-header {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-user {
+  font-family: var(--font-family);
+  font-size: 1rem;
+}
+
+.header-link,
+.header-logout {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.header-link:hover,
+.header-logout:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.header-link.active {
+  background: rgba(255, 255, 255, 0.35);
+}

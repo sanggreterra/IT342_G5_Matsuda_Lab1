@@ -1,0 +1,14 @@
+/* Branding - Consistent fonts and colors throughout the app */
+:root {
+  --font-family: "Arial", sans-serif;
+  --color-primary: #007bff;
+  --color-primary-hover: #0056b3;
+  --color-background: #f4f4f4;
+  --color-text: #333;
+  --color-white: white;
+  --color-border: #ddd;
+  --color-disabled: #ccc;
+  --color-summary-bg: #f8f9fa;
+  --border-radius: 5px;
+  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
