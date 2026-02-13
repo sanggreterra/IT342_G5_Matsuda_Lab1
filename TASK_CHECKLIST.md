@@ -3,14 +3,15 @@
 ## DONE
 - Consolidated the frontend pages (cd616a97b7cd6bff9dcff2fc9a5e26d8dd4ab5c0)
 - Consolidated API calls: POST /api/auth/register, POST /api/auth/login GET /api/user/me (protected) (cd616a97b7cd6bff9dcff2fc9a5e26d8dd4ab5c0)
+- Integrated Password Encryption using BCrypt (cd616a97b7cd6bff9dcff2fc9a5e26d8dd4ab5c0)
 
 ## IN-PROGRESS
 - Integrating Database Connection using MySQL
-- Integrating Password Encryption using BCrypt
+- Creating the mobile app in Androis Studio
+- Implementing Mobile component integration
 
 ## TODO
 - Fix backend dependencies
 - Implement Authentication
-- Implement Mobile component integration
 - Fix Documentation
 - Add Password Validation Warnings
