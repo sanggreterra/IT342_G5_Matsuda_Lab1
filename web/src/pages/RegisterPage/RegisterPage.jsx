@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { getPasswordRuleResults } from '../../utils/passwordValidation';
 import './RegisterPage.css';
 
 export default function RegisterPage() {
@@ -12,9 +13,19 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const passwordRules = getPasswordRuleResults(password);
+  const isPasswordValid = passwordRules.every((r) => r.passed);
+
   if (currentUser) {
     return <Navigate to="/" replace />;
   }
+
+  const normalizeError = (msg) => {
+    if (msg === 'User already exists' || msg === 'Email already exists') {
+      return 'User already exists.';
+    }
+    return msg;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,11 +36,16 @@ export default function RegisterPage() {
       return;
     }
 
+    if (!isPasswordValid) {
+      setError('Password does not meet all requirements.');
+      return;
+    }
+
     const result = await register(name.trim(), email.trim(), password);
     if (result.success) {
       navigate('/');
     } else {
-      setError(result.error);
+      setError(normalizeError(result.error));
     }
   };
 
@@ -66,6 +82,13 @@ export default function RegisterPage() {
             placeholder="Enter your password"
             required
           />
+          <ul className="password-warnings">
+            {passwordRules.map((rule) => (
+              <li key={rule.id} className={rule.passed ? 'passed' : ''}>
+                {rule.passed ? '✓' : '○'} {rule.label}
+              </li>
+            ))}
+          </ul>
           <label htmlFor="register-confirm">Confirm Password</label>
           <input
             id="register-confirm"

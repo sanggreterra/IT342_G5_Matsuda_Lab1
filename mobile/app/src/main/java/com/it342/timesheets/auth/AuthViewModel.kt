@@ -61,7 +61,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 is AuthResult.Success ->
                     _state.value = _state.value.copy(currentUser = result.user, registerError = null)
                 is AuthResult.Error ->
-                    _state.value = _state.value.copy(registerError = result.message)
+                    _state.value = _state.value.copy(registerError = normalizeRegisterError(result.message))
             }
         }
     }
@@ -75,4 +75,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     fun clearLoginError() { _state.value = _state.value.copy(loginError = null) }
     fun clearRegisterError() { _state.value = _state.value.copy(registerError = null) }
+
+    private fun normalizeRegisterError(message: String?): String {
+        if (message == "User already exists" || message == "Email already exists") {
+            return "User already exists."
+        }
+        return message ?: "Registration failed."
+    }
 }

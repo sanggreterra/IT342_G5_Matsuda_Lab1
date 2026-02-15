@@ -26,6 +26,19 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.it342.timesheets.ui.theme.ErrorText
 
+data class PasswordRule(val id: String, val label: String, val test: (String) -> Boolean)
+
+private val PASSWORD_RULES = listOf(
+    PasswordRule("length", "At least 8 characters long") { it.length >= 8 },
+    PasswordRule("lowercase", "Mix of uppercase and lowercase characters") {
+        it.any { c -> c.isLowerCase() } && it.any { c -> c.isUpperCase() }
+    },
+    PasswordRule("number", "Contains numbers") { it.any { c -> c.isDigit() } },
+    PasswordRule("special", "Contains special characters (e.g. !@#\$%)") {
+        it.any { c -> !c.isLetterOrDigit() }
+    }
+)
+
 @Composable
 fun RegisterScreen(
     error: String?,
@@ -99,6 +112,17 @@ fun RegisterScreen(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             modifier = Modifier.fillMaxWidth()
         )
+        Spacer(modifier = Modifier.height(8.dp))
+        Column(modifier = Modifier.fillMaxWidth()) {
+            PASSWORD_RULES.forEach { rule ->
+                val passed = rule.test(password)
+                Text(
+                    text = "${if (passed) "✓" else "○"} ${rule.label}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (passed) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
@@ -119,6 +143,11 @@ fun RegisterScreen(
                 localError = null
                 if (password != confirmPassword) {
                     localError = "Passwords do not match."
+                    return@Button
+                }
+                val passwordValid = PASSWORD_RULES.all { it.test(password) }
+                if (!passwordValid) {
+                    localError = "Password does not meet all requirements."
                     return@Button
                 }
                 onRegister(username.trim(), email.trim(), password)
