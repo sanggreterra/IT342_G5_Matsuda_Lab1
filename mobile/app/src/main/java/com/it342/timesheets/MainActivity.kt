@@ -28,14 +28,14 @@ import com.it342.timesheets.ui.components.AppHeader
 import com.it342.timesheets.ui.screens.LoginScreen
 import com.it342.timesheets.ui.screens.RegisterScreen
 import com.it342.timesheets.ui.screens.TimesheetScreen
-import com.it342.timesheets.ui.theme.TimeshetsTheme
+import com.it342.timesheets.ui.theme.TimesheetsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            TimeshetsTheme {
+            TimesheetsTheme {
                 TimesheetsApp()
             }
         }

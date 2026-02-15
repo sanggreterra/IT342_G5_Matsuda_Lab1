@@ -39,7 +39,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun TimeshetsTheme(
+fun TimesheetsTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
         // Use fixed theme to match web (primary blue #007bff)
         dynamicColor: Boolean = false,

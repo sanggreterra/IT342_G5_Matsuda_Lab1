@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Timeshets"
+rootProject.name = "Timesheets"
 include(":app")
